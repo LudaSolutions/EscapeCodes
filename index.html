@@ -54,4 +54,57 @@
   }
 
   /* Стиль кнопок */
-  .quest-link
+  .quest-link {
+    display: block;
+    text-decoration: none;
+    color: #3e2723;
+    background-color: rgba(255, 248, 235, 0.8);
+    border: 3px solid #8c7b50;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 12px;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 8px rgba(140, 123, 80, 0.3);
+  }
+
+  .quest-link:hover {
+    background-color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(140, 123, 80, 0.4);
+  }
+
+  .quest-link:active {
+    transform: scale(0.95);
+  }
+
+  .footer {
+    margin-top: 40px;
+    font-size: 16px;
+    color: #5d4037;
+    font-weight: bold;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+
+  <h1>Luda Elegant Solutions</h1>
+
+  <div class="menu-container">
+    
+    <a href="https://ludasolutions.github.io/EscapeCodes/ChristmasEscape.html" class="quest-link">
+      Christmas Escape
+    </a>
+
+    <a href="https://ludasolutions.github.io/EscapeCodes/CastleEscape.html" class="quest-link">
+      Castle Escape
+    </a>
+    
+  </div>
+
+  <div class="footer">Choose your adventure...</div>
+
+</body>
+</html>
