@@ -74,3 +74,85 @@
     border-radius: 8px;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+  
+  button:active {
+    transform: scale(0.98);
+  }
+
+  /* Текстове поле для підказки */
+  textarea {
+    width: 90%;
+    height: 120px;
+    border: 2px solid #5c4033; 
+    background-color: #fff; 
+    padding: 15px;
+    color: black;
+    font-family: inherit;
+    font-size: 20px;
+    resize: none; 
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+  
+  .error-msg {
+    color: #b71c1c; /* Яскраво-червоний */
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: bold;
+    min-height: 25px;
+  }
+</style>
+</head>
+<body>
+
+<div id="lock-screen" class="card">
+  <h1>Castle Gate</h1>
+  <p>Enter the secret code:</p>
+  
+  <input type="tel" id="code-input" placeholder="CODE">
+  <br>
+  <button onclick="checkCode()">OPEN</button>
+  
+  <div id="message" class="error-msg"></div>
+</div>
+
+<div id="success-screen" class="card hidden">
+  <h2>Gate Open!</h2>
+  
+  <textarea readonly>Your next clue:
+
+Look under the throne!</textarea>
+</div>
+
+<script>
+  // --- SETTINGS ---
+  const CORRECT_CODE = "777"; 
+  // ----------------
+
+  function checkCode() {
+    const input = document.getElementById('code-input').value;
+    const msg = document.getElementById('message');
+    
+    if (input.trim() === CORRECT_CODE) {
+      document.getElementById('lock-screen').classList.add('hidden');
+      document.getElementById('success-screen').classList.remove('hidden');
+    } else {
+      msg.textContent = "Wrong code!";
+      
+      const inputField = document.getElementById('code-input');
+      inputField.style.borderColor = "red";
+      setTimeout(() => { 
+          inputField.style.borderColor = "#5d4037"; 
+          msg.textContent = "";
+      }, 2000);
+    }
+  }
+</script>
+
+</body>
+</html>
