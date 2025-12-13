@@ -5,19 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luda Elegant Solutions</title>
 <style>
-  /* --- СТИЛЬ ФОНУ (Бежевий + Олива + Золото) --- */
+  /* --- ФОН --- */
   body {
     background-color: #faf0e6; 
-    
-    /* Складний візерунок фону */
+    /* Той самий візерунок */
     background-image: 
-        /* Золоті лінії */
         repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(212, 175, 55, 0.5) 60px, rgba(212, 175, 55, 0.5) 61px),
         repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(212, 175, 55, 0.5) 60px, rgba(212, 175, 55, 0.5) 61px),
-        /* Оливкові плями */
         radial-gradient(circle at 20% 35%, rgba(112, 130, 56, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 75% 60%, rgba(112, 130, 56, 0.3) 0%, transparent 55%),
-        radial-gradient(circle at 50% 10%, rgba(112, 130, 56, 0.2) 0%, transparent 40%);
+        radial-gradient(circle at 75% 60%, rgba(112, 130, 56, 0.3) 0%, transparent 55%);
     
     background-position: center;
     background-attachment: fixed;
@@ -31,17 +27,30 @@
     justify-content: center;
   }
 
+  /* --- КОНТЕЙНЕР МЕНЮ (КАРТКА) --- */
+  /* Це виправить проблему видимості: ми кладемо текст на напівпрозору плашку */
+  .content-wrapper {
+    background-color: rgba(255, 255, 255, 0.6); /* Світла підкладка */
+    padding: 30px;
+    border-radius: 20px;
+    border: 2px solid #8c7b50;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 400px;
+  }
+
   h1 {
-    /* Градієнт тексту */
-    background: -webkit-linear-gradient(#3e2723, #8d6e63);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 30px;
+    /* Прибрали складний градієнт, зробили просто колір */
+    color: #3e2723; 
+    margin: 0 0 30px 0;
     text-transform: uppercase;
     text-align: center;
-    font-size: 38px; /* Трохи менший шрифт, щоб влазила довга назва */
-    text-shadow: 1px 1px 2px rgba(212, 175, 55, 0.3);
-    padding: 0 10px;
+    font-size: 36px;
+    line-height: 1.2;
+    text-shadow: 1px 1px 0px rgba(212, 175, 55, 0.5);
   }
 
   .menu-container {
@@ -49,8 +58,6 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    max-width: 350px;
-    padding: 20px;
   }
 
   /* Стиль кнопок */
@@ -58,53 +65,57 @@
     display: block;
     text-decoration: none;
     color: #3e2723;
-    background-color: rgba(255, 248, 235, 0.8);
-    border: 3px solid #8c7b50;
-    padding: 20px;
-    font-size: 24px;
+    background-color: #fff8e1; /* Світло-жовтий фон кнопки */
+    border: 2px solid #5d4037;
+    padding: 18px;
+    font-size: 22px;
     font-weight: bold;
     text-align: center;
-    border-radius: 12px;
-    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 8px rgba(140, 123, 80, 0.3);
+    border-radius: 10px;
+    box-shadow: 3px 3px 0px rgba(93, 64, 55, 0.2); /* Чітка тінь */
+    transition: all 0.2s;
   }
 
   .quest-link:hover {
     background-color: #fff;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(140, 123, 80, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 3px 5px 5px rgba(93, 64, 55, 0.3);
   }
 
   .quest-link:active {
-    transform: scale(0.95);
+    transform: translateY(1px);
+    box-shadow: 1px 1px 0px rgba(93, 64, 55, 0.2);
   }
 
   .footer {
-    margin-top: 40px;
+    margin-top: 30px;
     font-size: 16px;
     color: #5d4037;
     font-weight: bold;
-    opacity: 0.8;
   }
 </style>
 </head>
 <body>
 
-  <h1>Luda Elegant Solutions</h1>
-
-  <div class="menu-container">
+  <div class="content-wrapper">
     
-    <a href="https://ludasolutions.github.io/EscapeCodes/ChristmasEscape.html" class="quest-link">
-      Christmas Escape
-    </a>
+    <h1>Luda Elegant Solutions</h1>
 
-    <a href="https://ludasolutions.github.io/EscapeCodes/CastleEscape.html" class="quest-link">
-      Castle Escape
-    </a>
-    
+    <div class="menu-container">
+      
+      <a href="https://ludasolutions.github.io/EscapeCodes/ChristmasEscape.html" class="quest-link">
+        Christmas Escape
+      </a>
+
+      <a href="https://ludasolutions.github.io/EscapeCodes/CastleEscape.html" class="quest-link">
+        Castle Escape
+      </a>
+      
+    </div>
+
+    <div class="footer">Choose your adventure...</div>
+  
   </div>
-
-  <div class="footer">Choose your adventure...</div>
 
 </body>
 </html>
