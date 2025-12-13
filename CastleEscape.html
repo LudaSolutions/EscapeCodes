@@ -5,106 +5,197 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Castle Escape</title>
 <style>
-  /* --- BACKGROUND --- */
+  /* --- 1. BACKGROUND --- */
   body {
-    /* Фон старого паперу/мапи */
     background-image: url("https://as2.ftcdn.net/v2/jpg/03/05/42/51/1000_F_305425131_aPPCTLxFVDPAu35CPm5CCCVWXZsiUdbu.jpg");
-    background-color: #8d6e63; /* Коричневий колір, якщо картинка не завантажиться */
+    background-color: #5d4037; 
     background-position: center;
     background-size: cover;
-    font-family: Fantasy, "Papyrus", serif; /* Шрифт у стилі фентезі */
+    background-attachment: fixed;
+    font-family: 'Courier New', Courier, monospace; 
     margin: 0;
-    height: 100vh;
+    min-height: 100vh; 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  /* --- CARD (SCROLL LOOK) --- */
+  /* --- 2. MAIN CARD --- */
   .card {
-    /* Світло-бежевий фон, майже непрозорий (0.9), щоб текст читався */
-    background-color: rgba(255, 248, 235, 0.95); 
-    padding: 40px;
-    border-radius: 5px;
-    /* Подвійна рамка для ефекту старовини */
-    border: 6px double #3e2723; 
+    background-color: #fdf5e6; /* Old Lace color */
+    border: 5px solid #3e2723; 
+    border-radius: 10px; 
+    padding: 30px;
+    width: 85%; 
+    max-width: 400px; 
     text-align: center;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+    box-shadow: 0 0 20px rgba(0,0,0,0.8); 
+    position: relative;
+    z-index: 100;
   }
 
-  /* Заголовки */
+  /* --- 3. TEXT --- */
   h1 {
-    color: #2c1b18; /* Дуже темний коричневий */
+    color: #2c1b18; 
     text-transform: uppercase;
     margin-top: 0;
-    font-size: 36px;
-    letter-spacing: 2px;
+    font-size: 32px;
     border-bottom: 2px solid #3e2723;
     padding-bottom: 10px;
   }
 
-  h2 {
-    color: #3e2723;
-    margin-top: 0;
-  }
-  
   p {
     font-weight: bold;
-    color: #4e342e; 
-    font-size: 22px;
-    margin-bottom: 25px;
+    color: #3e2723;
+    font-size: 20px;
+    margin-bottom: 20px;
   }
 
-  /* Поле вводу */
+  /* --- 4. INPUT --- */
   input {
-    width: 80%;
+    width: 90%; 
     padding: 15px;
-    font-size: 26px;
+    font-size: 28px;
     text-align: center;
-    border: 3px solid #5d4037;
-    background: #fff;
-    border-radius: 4px;
-    font-family: inherit;
-    margin-bottom: 25px;
-    color: #333;
-    outline: none;
-  }
-  
-  input:focus {
-    border-color: #8d6e63;
-    background-color: #efebe9;
-  }
-  
-  /* Кнопка */
-  button {
-    color: #fff;
-    background-color: #5d4037; /* Темна кнопка */
-    border: 2px solid #3e2723;
-    padding: 15px 35px;
-    font-size: 24px;
-    font-family: inherit;
-    cursor: pointer;
-    border-radius: 4px;
+    background-color: #fff;
+    border: 2px solid #5d4037;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    color: #000;
     font-weight: bold;
-    text-transform: uppercase;
-    transition: background 0.3s;
-    width: 100%;
-  }
-  
-  button:hover {
-    background-color: #4e342e;
-  }
-  
-  button:active {
-    background-color: #3e2723;
+    outline: none;
+    box-sizing: border-box; 
   }
 
-  /* Текст підказки */
+  /* --- 5. BUTTON --- */
+  button {
+    width: 100%;
+    padding: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    background-color: #5d4037; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 0 #3e2723; 
+  }
+
+  button:active {
+    box-shadow: none;
+    transform: translateY(4px);
+  }
+
+  /* --- 6. ERROR MESSAGE --- */
+  .error-msg {
+    color: #d32f2f; /* Red */
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 18px;
+    min-height: 50px; /* Reserved space for 2 lines of text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* --- 7. CLUE AREA --- */
   textarea {
     width: 100%;
-    height: 140px;
-    border: 2px solid #5d4037; 
-    background-color: #fff8e1; /* Жовтувати
+    height: 120px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 20px;
+    font-family: inherit;
+    text-align: center;
+    border: 2px dashed #5d4037;
+    background-color: #fff8e1;
+    color: #3e2723;
+    resize: none;
+    box-sizing: border-box;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+  <div id="lock-screen" class="card">
+    <h1>Castle Gate</h1>
+    <p>Enter the secret code:</p>
+    
+    <input type="tel" id="code-input" placeholder="____" maxlength="4">
+    <button onclick="checkCode()">OPEN GATE</button>
+    
+    <div id="message" class="error-msg"></div>
+  </div>
+
+  <div id="success-screen" class="card hidden">
+    <h1 style="color: #2e7d32; border-color: #2e7d32;">Gate Open!</h1>
+    
+    <p style="font-size: 24px; color: #2e7d32;">Welcome, Your Highness!</p>
+    
+    <p>The guards bow before you.</p>
+    
+    <textarea readonly>Your next clue:
+
+Look under the King's throne!</textarea>
+  </div>
+
+<script>
+  // --- SETTINGS ---
+  const CORRECT_CODE = "7777"; 
+  // ----------------
+
+  // --- FUNNY ERROR MESSAGES ---
+  const insults = [
+    "Nice try, peasant.",
+    "The guards are laughing at you.",
+    "Have you tried '1234'? Just kidding.",
+    "Access denied. The dragon is waking up.",
+    "Are you even trying, or just mashing buttons?",
+    "Wrong. Do you want to end up in the dungeon?",
+    "That was embarrassing. Try again.",
+    "My grandma hacks better than you.",
+    "Incorrect. The King is disappointed.",
+    "Nope. Maybe ask a wizard for help?"
+  ];
+
+  function checkCode() {
+    const input = document.getElementById('code-input').value;
+    const msg = document.getElementById('message');
+    const inputField = document.getElementById('code-input');
+    
+    if (input.trim() === CORRECT_CODE) {
+      document.getElementById('lock-screen').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+    } else {
+      // Pick a random insult
+      const randomInsult = insults[Math.floor(Math.random() * insults.length)];
+      msg.textContent = randomInsult;
+      
+      // Error Animation
+      inputField.style.borderColor = "#d32f2f";
+      inputField.style.backgroundColor = "#ffebee";
+      
+      // Shake effect
+      const card = document.getElementById('lock-screen');
+      card.style.transform = "translateX(5px)";
+      setTimeout(() => { card.style.transform = "translateX(-5px)"; }, 50);
+      setTimeout(() => { card.style.transform = "translateX(5px)"; }, 100);
+      setTimeout(() => { card.style.transform = "translateX(0)"; }, 150);
+
+      // Reset style after 2 seconds (but keep the funny text)
+      setTimeout(() => { 
+          inputField.style.borderColor = "#5d4037"; 
+          inputField.style.backgroundColor = "#fff";
+      }, 2000);
+    }
+  }
+</script>
+
+</body>
+</html>
