@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Центр Активації Тоботів</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Exo+2:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #0a1128; /* Темно-синій металік */
+            font-family: 'Exo 2', sans-serif;
+            color: white;
+        }
+
+        /* Фон у стилі Тоботів */
+        .bg-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 85, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 85, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffcc00; /* Жовтий Тобот */
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.7);
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        /* Рамка для введення */
+        .terminal-box {
+            background: rgba(43, 43, 43, 0.8);
+            border: 4px solid #0055ff; /* Синій Тобот */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 85, 255, 0.5), inset 0 0 15px rgba(0, 85, 255, 0.3);
+            position: relative;
+        }
+
+        .terminal-box::before {
+            content: "SYSTEM ID: TOBOT-REPAIR";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #0055ff;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-family: 'Orbitron';
+        }
+
+        input {
+            background: #111;
+            border: 2px solid #ffcc00;
+            color: #ffcc00;
+            font-size: 40px;
+            padding: 10px;
+            width: 150px;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            outline: none;
+            border-radius: 10px;
+        }
+
+        button {
+            margin-top: 20px;
+            background: #ff3333; /* Червоний колір активності */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            box-shadow: 0 5px 0 #990000;
+        }
+
+        button:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #990000;
+        }
+
+        #error-msg {
+            color: #ff3333;
+            margin-top: 20px;
+            font-weight: bold;
+            height: 24px;
+        }
+
+        /* Екран з малюнком */
+        #success-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 100;
+        }
+
+        #success-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .shaking {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-pattern"></div>
+
+<div class="container" id="login-container">
+    <h1>ВВЕДІТЬ КОД АКТИВАЦІЇ</h1>
+    
+    <div class="terminal-box" id="box">
+        <input type="text" id="passInput" maxlength="3" placeholder="???">
+        <br>
+        <button onclick="checkCode()">ЗАПУСК СИСТЕМИ</button>
+    </div>
+
+    <div id="error-msg"></div>
+</div>
+
+<div id="success-screen">
+    <img id="victoryImg" src="https://images.unsplash.com/photo-1531641442308-9279b7237c67?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Victory">
+</div>
+
+<script>
+    // ЗАМІНІТЬ ЦЕ ПОСИЛАННЯ НА СВОЄ (наприклад, картинку з Тоботом)
+    const imageUrl = 'https://i.ibb.co/Xz9Zxq7/tobot-victory.jpg'; 
+    document.getElementById('victoryImg').src = imageUrl;
+
+    function checkCode() {
+        const input = document.getElementById('passInput');
+        const error = document.getElementById('error-msg');
+        const box = document.getElementById('box');
+        const val = input.value.trim();
+
+        if (val === "231") {
+            document.getElementById('success-screen').style.display = 'block';
+            // Можна додати звук перемоги, якщо захочете
+        } else {
+            error.innerText = "ПАРОЛЬ НЕ ВГАДАЛИ! Спробуй поміняти цифри місцями.";
+            box.classList.add('shaking');
+            setTimeout(() => box.classList.remove('shaking'), 500);
+            input.value = "";
+        }
+    }
+
+    // Дозволити натискання Enter
+    document.getElementById('passInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            checkCode();
+        }
+    });
+</script>
+
+</body>
+</html>
