@@ -8,9 +8,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
         :root {
-            --bg-color: #d1cbc1; /* Колір старого паперу */
+            --bg-color: #d1cbc1;
             --text-color: #1a1a1a;
-            --highlight: rgba(76, 175, 80, 0.5); /* Підсвітка правильного місця */
+            --highlight: rgba(76, 175, 80, 0.5);
         }
 
         body {
@@ -25,7 +25,7 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
-            touch-action: pan-x pan-y; /* Дозволяє зум і скрол сторінки */
+            touch-action: pan-x pan-y;
         }
 
         header {
@@ -68,9 +68,8 @@
             position: relative;
             width: 95vw;
             max-width: 600px;
-            /* Пропорція пазлу (5 колонок x 6 рядків). Приблизно 5:6 */
             aspect-ratio: 5 / 6; 
-            margin-bottom: 200px; /* Місце для розкиданих шматочків знизу */
+            margin-bottom: 50px; 
         }
 
         #board {
@@ -134,13 +133,14 @@
 
         .piece {
             position: absolute;
-            width: calc(100% / 5); /* 1/5 ширини поля */
-            height: calc(100% / 6); /* 1/6 висоти поля */
-            background-size: 500% 600%; /* Розтягуємо фон, щоб відображалась потрібна частина */
+            width: calc(100% / 5); 
+            height: calc(100% / 6); 
+            background-size: 100% 100%; 
+            background-repeat: no-repeat;
             cursor: grab;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
             z-index: 50;
-            touch-action: none; /* Запобігає скролу при тягненні шматочка */
+            touch-action: none; 
             transition: transform 0.1s, box-shadow 0.1s;
         }
 
@@ -151,14 +151,13 @@
         }
 
         .piece.locked {
-            z-index: 2 !important; /* На задній план */
+            z-index: 2 !important; 
             pointer-events: none;
             box-shadow: none;
             border: none;
             transform: scale(1);
         }
 
-        /* Салют */
         canvas#fireworks {
             position: fixed;
             top: 0;
@@ -169,7 +168,6 @@
             z-index: 9999;
         }
 
-        /* Приховати сітку при перемозі */
         .hide-grid {
             border: none !important;
             box-shadow: none !important;
@@ -187,18 +185,16 @@
     </header>
 
     <div id="game-area">
-        <img id="hint-img" src="https://ludasolutions.github.io/EscapeCodes/Train/fullmap.jpg" alt="Hint">
-        <div id="board">
-            </div>
-        <img id="full-img" src="https://ludasolutions.github.io/EscapeCodes/Train/fullmap.jpg" alt="Full Map">
-        
-        </div>
+        <img id="hint-img" src="./fullmap.png" alt="Hint">
+        <div id="board"></div>
+        <img id="full-img" src="./fullmap.png" alt="Full Map">
+    </div>
 
     <canvas id="fireworks"></canvas>
 
     <script>
-        const BASE_URL = "https://ludasolutions.github.io/EscapeCodes/Train/";
-        const EXTENSION = ".jpg"; // Змініть на .png, якщо файли у вас збережені як png
+        const BASE_URL = "./"; 
+        const EXTENSION = ".png"; // Змінено розширення для шматочків на .png
         const COLS = 5;
         const ROWS = 6;
         const TOTAL_PIECES = COLS * ROWS;
@@ -214,7 +210,6 @@
         let pieces = [];
         let cells = [];
         
-        // Ініціалізація гри
         function initGame() {
             createBoard();
             createPieces();
@@ -241,12 +236,9 @@
                     piece.dataset.row = r;
                     piece.dataset.col = c;
                     
-                    // Завантажуємо зображення
                     const bgUrl = `${BASE_URL}row-${r}-column-${c}${EXTENSION}`;
-                    piece.style.backgroundImage = `url(${bgUrl})`;
-                    piece.style.backgroundSize = '100% 100%';
+                    piece.style.backgroundImage = `url("${bgUrl}")`;
                     
-                    // Рандомна позиція внизу (під полем)
                     randomizePosition(piece);
                     
                     gameArea.appendChild(piece);
@@ -257,22 +249,21 @@
         }
 
         function randomizePosition(piece) {
-            // Розміщуємо шматочки під полем (margin-bottom: 200px у game-area)
             const areaWidth = gameArea.offsetWidth;
             const areaHeight = gameArea.offsetHeight;
             const pieceWidth = areaWidth / COLS;
             const pieceHeight = areaHeight / ROWS;
             
             const maxLeft = areaWidth - pieceWidth;
-            // Розташування під дошкою
-            const minTop = areaHeight + 20; 
-            const maxTop = areaHeight + 150; 
+            const maxTop = areaHeight - pieceHeight; 
 
-            piece.style.left = Math.random() * maxLeft + 'px';
-            piece.style.top = (minTop + Math.random() * (maxTop - minTop)) + 'px';
+            piece.style.left = (Math.random() * maxLeft) + 'px';
+            piece.style.top = (Math.random() * maxTop) + 'px';
+            
+            const randomRotation = (Math.random() - 0.5) * 30; 
+            piece.style.transform = `rotate(${randomRotation}deg)`;
         }
 
-        // Логіка Drag and Drop (працює на мишці та сенсорах)
         function makeDraggable(piece) {
             let startX, startY, startLeft, startTop;
             let currentCell = null;
@@ -280,9 +271,9 @@
             piece.addEventListener('pointerdown', (e) => {
                 if (piece.classList.contains('locked')) return;
                 
-                // Переносимо на передній план
                 pieces.forEach(p => { if (!p.classList.contains('locked')) p.style.zIndex = 50; });
                 piece.style.zIndex = 100;
+                piece.style.transform = 'rotate(0deg) scale(1.05)';
 
                 startX = e.clientX;
                 startY = e.clientY;
@@ -298,18 +289,13 @@
                     let newLeft = startLeft + dx;
                     let newTop = startTop + dy;
 
-                    // Обмеження: не виходити за рамки екрану (body)
                     const pieceRect = piece.getBoundingClientRect();
-                    const bodyRect = document.body.getBoundingClientRect();
-                    
-                    // Обчислення центру шматочка для підсвітки клітинок
                     const pieceCenterX = pieceRect.left + pieceRect.width / 2;
                     const pieceCenterY = pieceRect.top + pieceRect.height / 2;
 
                     piece.style.left = newLeft + 'px';
                     piece.style.top = newTop + 'px';
 
-                    // Перевірка, над якою клітинкою знаходимось
                     let target = getCellUnderPoint(pieceCenterX, pieceCenterY);
                     
                     if (currentCell && currentCell !== target) {
@@ -327,17 +313,21 @@
                     piece.onpointermove = null;
                     piece.onpointerup = null;
                     piece.releasePointerCapture(e.pointerId);
+                    piece.style.transform = 'rotate(0deg) scale(1)';
 
                     if (currentCell) {
                         currentCell.classList.remove('highlight');
                         
-                        // Перевіряємо чи правильна клітинка
                         if (currentCell.dataset.row === piece.dataset.row && 
                             currentCell.dataset.col === piece.dataset.col) {
-                            
-                            // Зафіксувати
                             snapPiece(piece, currentCell);
+                        } else {
+                            const randomRotation = (Math.random() - 0.5) * 30; 
+                            piece.style.transform = `rotate(${randomRotation}deg)`;
                         }
+                    } else {
+                        const randomRotation = (Math.random() - 0.5) * 30; 
+                        piece.style.transform = `rotate(${randomRotation}deg)`;
                     }
                 };
             });
@@ -354,7 +344,6 @@
         }
 
         function snapPiece(piece, cell) {
-            // Вираховуємо відносні координати відносно game-area
             const cellWidth = gameArea.offsetWidth / COLS;
             const cellHeight = gameArea.offsetHeight / ROWS;
             
@@ -368,7 +357,6 @@
             
             piece.classList.add('locked');
             
-            // Легке підсвічування зеленим на мить
             piece.style.filter = 'brightness(1.5) sepia(1) hue-rotate(90deg) saturate(3)';
             setTimeout(() => { piece.style.filter = 'none'; }, 300);
 
@@ -376,15 +364,13 @@
             checkWin();
         }
 
-        // Кнопка Help
         helpBtn.addEventListener('click', () => {
             hintImg.classList.add('visible');
             setTimeout(() => {
                 hintImg.classList.remove('visible');
-            }, 3000); // Зникає через 3 секунди
+            }, 3000); 
         });
 
-        // Перевірка перемоги
         function checkWin() {
             if (lockedCount === TOTAL_PIECES) {
                 setTimeout(() => {
@@ -392,13 +378,12 @@
                     helpBtn.style.display = 'none';
                     winText.style.display = 'block';
                     fullImg.classList.add('visible');
-                    pieces.forEach(p => p.style.opacity = '0'); // Ховаємо окремі шматочки
+                    pieces.forEach(p => p.style.opacity = '0'); 
                     startFireworks();
                 }, 500);
             }
         }
 
-        // --- ПРОСТА АНІМАЦІЯ САЛЮТУ ---
         const canvas = document.getElementById('fireworks');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -433,7 +418,7 @@
                 let p = particles[i];
                 p.x += p.vx;
                 p.y += p.vy;
-                p.vy += 0.1; // Гравітація
+                p.vy += 0.1; 
                 p.alpha -= p.decay;
                 
                 ctx.globalAlpha = p.alpha;
@@ -454,7 +439,6 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            // Перемальовка зафіксованих шматочків при зміні розміру екрану
             const cellWidth = gameArea.offsetWidth / COLS;
             const cellHeight = gameArea.offsetHeight / ROWS;
             pieces.forEach(piece => {
@@ -469,7 +453,6 @@
             });
         });
 
-        // Запуск
         window.onload = initGame;
     </script>
 </body>
