@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONNECTION TERMINATED — Inferno Comcast remediation</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #0f0f0f;
+            color: #dcdcdc;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            text-transform: uppercase;
+            color: #8b0000; /* Темно-червоний (кров/поразка) */
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-family: 'Courier New', Courier, monospace;
+            color: #ff4500;
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        p {
+            max-width: 600px;
+            margin: 10px auto;
+            line-height: 1.6;
+        }
+
+        #failure-message-box {
+            background-color: #1a1a1a;
+            border: 2px solid #8b0000;
+            padding: 20px;
+            max-width: 600px;
+            margin: 30px auto;
+            text-align: left;
+        }
+
+        .highlight {
+            color: #8b0000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>CONNECTION TERMINATED</h1>
+    <h2>(failed. predictably.)</h2>
+    
+    <p>Detected Remediation failure. Wifi connection is void. Your intrusion from the void continues. We are currently remediating your cognitive incompetence. Ticket remains open, client #402.</p>
+    <p>You did not survive.</p>
+    <p>Wifi access is now restricted to an unapproved rate of 1.9 Mbps for all eternity. We hold steadfast faith that RE Hard Reset resolves performance issues. It is the only way.</p>
+    <p>* failures null Wi-Fi warranty. All roads lead to RE Hard Reset.*</p>
+
+    <!-- Поле для рандомного повідомлення -->
+    <div id="failure-message-box">
+        <p id="failure-message-text"></p>
+    </div>
+
+    <script>
+        // 10 варіантів повідомлень, перевірених на сарказм та стиль
+        const failureMessages = [
+            "Remedy protocol failure: Incorrect duration detected. Purgatory buffering initiated.",
+            "Wifi connection void. Re-apply paperclip. Reset matrix invalidated.",
+            "Quantum tunneling error. We recommend physical termination of connection.",
+            "Signal lost to void. Re-calculate hard reset sequence or face eternality.",
+            "Client error #666: Cognitive incompetence detected. Remedy fails.",
+            "Network access terminated due to protocol non-compliance. Re-attempt.",
+            "Temporal displacement detected. You have reset into a non-functional timeline.",
+            "All roads lead to RE Hard Reset. This path is not one of them.",
+            "Router core overload. Please cease attempts before physical termination.",
+            "Wait times for new connection: 666 years. Goodbye."
+        ];
+
+        // Рандомний вибір повідомлення при завантаженні
+        document.getElementById('failure-message-text').innerText = failureMessages[Math.floor(Math.random() * failureMessages.length)];
+    </script>
+</body>
+</html>
