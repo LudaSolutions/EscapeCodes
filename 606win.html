@@ -8,92 +8,116 @@
         body {
             font-family: 'Courier New', Courier, monospace;
             background-color: #0d0d0d;
-            color: #e0e0e0;
+            color: #f0f0f0;
             text-align: center;
             margin: 0;
             padding: 25px 15px;
         }
 
+        /* 1. Головне привітання великим словом по центру */
         .hero-title {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 2.8rem;
+            font-size: 3rem;
+            font-weight: bold;
             color: #ff4500;
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin: 10px 0 5px 0;
+            margin: 10px 0 0 0;
         }
 
         .sub-title {
             color: #8b0000;
             font-size: 1.1rem;
             text-transform: uppercase;
+            font-weight: bold;
             margin-bottom: 20px;
         }
 
-        p {
+        /* 2. ХУК одразу під привітанням */
+        .hook-box {
+            border: 2px solid #ff4500;
+            background: #1f0a00;
+            padding: 16px;
             max-width: 550px;
-            margin: 10px auto;
-            line-height: 1.5;
+            margin: 0 auto 25px auto;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.3);
+        }
+
+        .hook-box h2 {
+            margin: 0 0 8px 0;
+            font-size: 1.25rem;
+            color: #ff4500;
+            text-transform: uppercase;
+        }
+
+        .hook-box p {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* 3. Чіткі та видимі умови */
+        .rules-container {
+            background-color: #141414;
+            border: 1px solid #8b0000;
+            padding: 20px;
+            max-width: 550px;
+            margin: 0 auto;
+            text-align: left;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .rules-container h3 {
+            color: #ff4500;
+            margin-top: 0;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            text-align: center;
+            border-bottom: 1px dashed #8b0000;
+            padding-bottom: 10px;
+        }
+
+        .rule-item {
+            margin-bottom: 14px;
+            line-height: 1.4;
             font-size: 0.95rem;
         }
 
-        .highlight {
+        .rule-number {
             color: #ff4500;
             font-weight: bold;
         }
 
-        .billboard-banner {
-            border: 1px solid #ff4500;
-            background: #1a0a00;
-            padding: 12px;
-            max-width: 520px;
-            margin: 20px auto;
+        .highlight {
             color: #ffaa80;
-            font-size: 1rem;
+            font-weight: bold;
         }
 
-        .rules-box {
-            background-color: #141414;
-            border: 1px solid #8b0000;
-            padding: 15px 20px;
-            max-width: 520px;
-            margin: 20px auto;
-            text-align: left;
-            font-size: 0.88rem;
-        }
-
-        .rules-box h3 {
+        .tag-highlight {
+            background: #2a0000;
             color: #ff4500;
-            margin-top: 0;
-            font-size: 1rem;
-            text-transform: uppercase;
-            text-align: center;
+            padding: 2px 6px;
+            border: 1px solid #8b0000;
+            font-weight: bold;
         }
 
-        .rules-box ol {
-            padding-left: 18px;
-            margin: 10px 0 0 0;
-        }
-
-        .rules-box li {
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
+        /* Кнопка дії */
         .button {
             display: inline-block;
             background-color: #ff4500;
             color: #000;
-            padding: 14px 28px;
+            padding: 16px 32px;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: bold;
             text-transform: uppercase;
             text-decoration: none;
             cursor: pointer;
-            margin-top: 15px;
+            margin-top: 25px;
             border: none;
-            box-shadow: 0 0 10px rgba(255, 69, 0, 0.4);
+            box-shadow: 0 0 12px rgba(255, 69, 0, 0.5);
+            transition: all 0.2s ease;
         }
 
         .button:hover {
@@ -101,50 +125,76 @@
             color: #fff;
         }
 
-        /* Дуже дрібний невидимий/скромний дисклеймер у самому низу */
+        /* 4. Дрібнесенький дисклеймер у самому низу */
         .micro-disclaimer {
-            font-size: 9px;
-            color: #555555;
+            font-size: 8px;
+            color: #444444;
             max-width: 500px;
             margin: 40px auto 10px auto;
             line-height: 1.2;
             text-align: center;
+            user-select: none;
         }
     </style>
 </head>
 <body>
 
+    <!-- 1. ПРИВІТАННЯ -->
     <div class="hero-title">CONGRATULATIONS!</div>
     <div class="sub-title">Wi-Fi Restored (Temporarily)</div>
 
-    <p>Unit #402, you executed the Hard Reset protocol correctly. Your connection is back!</p>
-    
-    <div class="billboard-banner">
-        🔥 <strong>A giant billboard in central Istanbul will broadcast your victory to the entire void!</strong>
+    <!-- 2. ХУК ПРЯМО ПІД ПРИВІТАННЯМ -->
+    <div class="hook-box">
+        <h2>🔥 WANT A GIANT BILLBOARD IN ISTANBUL TO BROADCAST YOUR VICTORY?</h2>
+        <p>Follow the mandatory protocols below to claim an instant <strong>25% OFF discount</strong> and get featured in central Istanbul!</p>
     </div>
 
-    <div class="rules-box">
-        <h3>CLAIM YOUR REWARDS:</h3>
-        <ol>
-            <li>Fill out your physical <strong>Certificate of Tech-Exorcism</strong>.</li>
-            <li>Take a photo of your team (or partial team) holding it.</li>
-            <li>Post the photo to Instagram / Facebook Stories or Feed.</li>
-            <li>Tag us: <span class="highlight">@lprintables @ludasolutions @etsy</span></li>
-            <li><strong>INSTANT REWARD:</strong> Get a <strong>25% OFF discount code</strong> for digital games in our Etsy shop sent to your DM!</li>
-            <li><strong>ISTANBUL BILLBOARD:</strong> Every 2nd qualifying team will be featured on a massive billboard in central Istanbul (photo report on IG)!</li>
-            <li><strong>100% CHANCE:</strong> Leave an Etsy review to guarantee your spot on the billboard.</li>
-        </ol>
+    <!-- 3. ЧІТКІ ТА ВИДИМІ УМОВИ -->
+    <div class="rules-container">
+        <h3>MANDATORY CLAIM PROTOCOL:</h3>
+
+        <div class="rule-item">
+            <span class="rule-number">1.</span> Fill out your physical <strong>Certificate of Tech-Exorcism</strong> with your team name.
+        </div>
+
+        <div class="rule-item">
+            <span class="rule-number">2.</span> Take a photo of your team (or partial team / hands) holding the completed certificate.
+        </div>
+
+        <div class="rule-item">
+            <span class="rule-number">3.</span> Share the photo on <span class="highlight">Instagram or Facebook</span> (Stories or Feed).
+        </div>
+
+        <div class="rule-item">
+            <span class="rule-number">4.</span> <strong>MUST TAG ALL 3 ACCOUNTS:</strong><br>
+            <span class="tag-highlight">@lprintables</span> 
+            <span class="tag-highlight">@ludasolutions</span> 
+            <span class="tag-highlight">@etsy</span>
+        </div>
+
+        <div class="rule-item">
+            <span class="rule-number">5.</span> <strong>INSTANT REWARD:</strong> Receive a <span class="highlight">25% OFF discount code</span> for any digital game in our Etsy store (sent straight to your DM)!
+        </div>
+
+        <div class="rule-item">
+            <span class="rule-number">6.</span> <strong>ISTANBUL BILLBOARD:</strong> 1 out of every 2 teams will have their victory displayed on a massive billboard in central Istanbul!
+        </div>
+
+        <div class="rule-item">
+            <span class="rule-number">7.</span> <strong>100% CHANCE:</strong> Leave an Etsy review for this game to guarantee your team's spot on the Istanbul billboard!
+        </div>
     </div>
 
-    <button class="button" onclick="openInstagram()">Open Instagram</button>
+    <button class="button" onclick="openInstagram()">Open Instagram & Post Photo</button>
 
+    <!-- 4. ДУЖЕ ДРІБНИЙ ТЕКСТ В САМОМУ НИЗУ -->
     <div class="micro-disclaimer">
-        *Note: The billboard photo report is created using AI within 1 week from the date players DM their winning team names to @lprintables on Instagram.*
+        *Disclaimer: The physical billboard is a neural-net simulation. The AI-generated billboard visual report will be created and delivered within 1 week after players DM their winning team names to @lprintables on Instagram. All void warranties apply.*
     </div>
 
     <script>
         function openInstagram() {
-            alert("Take a photo of your certificate, post it to Stories or Feed with tags @lprintables @ludasolutions @etsy! We will DM you your 25% discount code.");
+            alert("Take a photo with your certificate, post it to Stories or Feed tagging @lprintables @ludasolutions @etsy, and DM @lprintables your team name!");
             window.location.href = "https://www.instagram.com/lprintables/";
         }
     </script>
